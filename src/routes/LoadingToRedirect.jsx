@@ -21,7 +21,7 @@ const LoadingToRedirect = () => {
         }
         return currentCount - 1;
       });
-    }, 800);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, []);
