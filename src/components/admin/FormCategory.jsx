@@ -33,7 +33,7 @@ const FormCategory = () => {
     if (!name) {
       return toast.warning("Please fill data");
     }
-    setLoading(true); // Start loading during API request
+    setLoading(true);
     try {
       let res;
       if (editingId) {
@@ -41,20 +41,29 @@ const FormCategory = () => {
         res = await updateCategory(token, editingId, { name });
         toast.success(`แก้ไขหมวด ${res.data.name} สำเร็จ!!!`);
         setEditingId(null); // Exit edit mode
+  
+        // Find the index of the category being edited and update its name
+        const updatedCategories = categories.map((category) =>
+          category.id === editingId ? { ...category, name: res.data.name } : category
+        );
+        useEcomStore.setState({ categories: updatedCategories }); // Update store with the new category list
       } else {
         // Create category
         res = await createCategory(token, { name });
         toast.success(`เพิ่มหมวด ${res.data.name} สำเร็จ!!!`);
+        useEcomStore.setState((state) => ({
+          categories: [...state.categories, res.data], // Add new category to the list
+        }));
       }
       setName(""); // Clear input after action
-      getCategory(token); // Refresh category list
     } catch (err) {
       console.log(err);
       toast.error("เกิดข้อผิดพลาดในการดำเนินการ");
     } finally {
-      setLoading(false); // Stop loading after action
+      setLoading(false);
     }
   };
+  
 
   // Handle Remove Category
   const handleRemove = async (id) => {
