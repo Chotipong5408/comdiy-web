@@ -26,6 +26,8 @@ const FormProduct = () => {
 
   const [form, setForm] = useState(initialState);
   const [search, setSearch] = useState(""); // เพิ่ม state สำหรับคำค้นหา
+  const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     getCategory();
@@ -45,6 +47,7 @@ const FormProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // เริ่มโหลด
     try {
       const res = await createProduct(token, form);
       setForm(initialState);
@@ -52,11 +55,14 @@ const FormProduct = () => {
       toast.success(`เพิ่มข้อมูล ${res.data.title} สำเร็จ`);
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false); // เลิกโหลด
     }
     setTimeout(() => {
       window.location.reload();
     }, 800);
   };
+  
 
   const handleDelete = async (id) => {
     if (window.confirm("คุณแน่ใจที่จะลบใช่หรือไม่?")) {
@@ -101,12 +107,16 @@ const FormProduct = () => {
 
               <br />
               <div>
-                <button
-                  type="submit"
-                  className="mt-2 bg-blue-500 text-white p-2 rounded-md shadow-md hover:scale-105 hover:-translate-y-1 hover:duration-200 w-64"
-                >
-                  เพิ่มสินค้า
-                </button>
+              <button
+  type="submit"
+  className="mt-2 bg-blue-500 text-white p-2 rounded-md shadow-md hover:scale-105 hover:-translate-y-1 hover:duration-200 w-64"
+>
+  {loading ? (
+    <ClipLoader size={20} color="white" loading={loading} />
+  ) : (
+    "เพิ่มสินค้า"
+  )}
+</button>
               </div>
 
               <br />
