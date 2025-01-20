@@ -9,7 +9,7 @@ const style = {
 };
 
 const LoadingToRedirect = () => {
-  const [count, setCount] = useState(4);
+  const [count, setCount] = useState(1);
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const LoadingToRedirect = () => {
         }
         return currentCount - 1;
       });
-    }, 1000);
+    }, 1500);
 
     return () => clearInterval(interval);
   }, []);
