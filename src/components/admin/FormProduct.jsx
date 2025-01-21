@@ -29,7 +29,6 @@ const FormProduct = () => {
   const [search, setSearch] = useState(""); // เพิ่ม state สำหรับคำค้นหา
   const [loading, setLoading] = useState(false);
 
-
   useEffect(() => {
     getCategory();
     getProduct(100);
@@ -63,7 +62,6 @@ const FormProduct = () => {
       window.location.reload();
     }, 800);
   };
-  
 
   const handleDelete = async (id) => {
     if (window.confirm("คุณแน่ใจที่จะลบใช่หรือไม่?")) {
@@ -108,16 +106,16 @@ const FormProduct = () => {
 
               <br />
               <div>
-              <button
-  type="submit"
-  className="mt-2 bg-blue-500 text-white p-2 rounded-md shadow-md hover:scale-105 hover:-translate-y-1 hover:duration-200 w-64"
->
-  {loading ? (
-    <ClipLoader size={20} color="white" loading={loading} />
-  ) : (
-    "เพิ่มสินค้า"
-  )}
-</button>
+                <button
+                  type="submit"
+                  className="mt-2 bg-blue-500 text-white p-2 rounded-md shadow-md hover:scale-105 hover:-translate-y-1 hover:duration-200 w-64"
+                >
+                  {loading ? (
+                    <ClipLoader size={20} color="white" loading={loading} />
+                  ) : (
+                    "เพิ่มสินค้า"
+                  )}
+                </button>
               </div>
 
               <br />
@@ -183,102 +181,103 @@ const FormProduct = () => {
             <hr />
             <Uploadfile form={form} setForm={setForm} />
             <hr />
-
-            <table className="table-auto w-full border border-gray-300 rounded-lg shadow-md">
-              <thead>
-                <tr className="bg-gray-100 border-b border-gray-300 text-center">
-                  <th scope="col" className="px-4 py-2">
-                    No.
-                  </th>
-                  <th scope="col" className="px-4 py-2">
-                    รูปภาพ
-                  </th>
-                  <th scope="col" className="px-4 py-2">
-                    ชื่อสินค้า
-                  </th>
-                  <th scope="col" className="px-4 py-2">
-                    รายละเอียด
-                  </th>
-                  <th scope="col" className="px-4 py-2">
-                    ราคา
-                  </th>
-                  <th scope="col" className="px-4 py-2">
-                    จำนวน
-                  </th>
-                  <th scope="col" className="px-4 py-2 whitespace-nowrap">
-                    จำนวนที่ขายได้
-                  </th>
-                  <th scope="col" className="px-4 py-2">
-                    วันที่อัปเดต
-                  </th>
-                  <th scope="col" className="px-4 py-2">
-                    จัดการ
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredProducts.map((item, index) => (
-                  <tr
-                    key={index}
-                    className={`text-center ${
-                      index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                    } hover:bg-gray-100 transition duration-200`}
-                  >
-                    <th
-                      scope="row"
-                      className="border-b border-gray-300 px-4 py-2"
-                    >
-                      {index + 1}
+            <div className="overflow-auto max-h-[80vh]">
+              <table className="table-auto w-full border border-gray-300 rounded-lg shadow-md">
+                <thead>
+                  <tr className="bg-gray-100 border-b border-gray-300 text-center">
+                    <th scope="col" className="px-4 py-2">
+                      No.
                     </th>
-                    <td className="border-b border-gray-300 px-4 py-2">
-                      {item.images.length > 0 ? (
-                        <img
-                          className="w-24 h-24 rounded-lg shadow-md object-cover"
-                          src={item.images[0].url}
-                          alt={item.title}
-                        />
-                      ) : (
-                        <div className="w-24 h-24 bg-gray-200 rounded-md flex items-center justify-center shadow-sm text-gray-500">
-                          No Image
-                        </div>
-                      )}
-                    </td>
-                    <td className="border-b border-gray-300 px-4 py-2">
-                      {item.title}
-                    </td>
-                    <td className="border-b border-gray-300 px-4 py-2">
-                      {item.description}
-                    </td>
-                    <td className="border-b border-gray-300 px-4 py-2 text-green-600 font-semibold whitespace-nowrap">
-                      {numberFormat(item.price)} ฿
-                    </td>
-                    <td className="border-b border-gray-300 px-4 py-2">
-                      {item.quantity}
-                    </td>
-                    <td className="border-b border-gray-300 px-4 py-2">
-                      {item.sold}
-                    </td>
-                    <td className="border-b border-gray-300 px-4 py-2 whitespace-nowrap">
-                      {dateFormat(item.updatedAt)}
-                    </td>
-                    <td className="border-b border-gray-300 px-4 py-2 flex justify-center gap-2">
-                      <Link
-                        to={`/admin/product/${item.id}`}
-                        className="bg-blue-500 text-white p-2 rounded-md shadow-md hover:bg-blue-600 hover:scale-105 transition duration-200"
-                      >
-                        <Pencil />
-                      </Link>
-                      <button
-                        className="bg-red-500 text-white p-2 rounded-md shadow-md hover:bg-red-600 hover:scale-105 transition duration-200"
-                        onClick={() => handleDelete(item.id)}
-                      >
-                        <Trash />
-                      </button>
-                    </td>
+                    <th scope="col" className="px-4 py-2">
+                      รูปภาพ
+                    </th>
+                    <th scope="col" className="px-4 py-2">
+                      ชื่อสินค้า
+                    </th>
+                    <th scope="col" className="px-4 py-2">
+                      รายละเอียด
+                    </th>
+                    <th scope="col" className="px-4 py-2">
+                      ราคา
+                    </th>
+                    <th scope="col" className="px-4 py-2">
+                      จำนวน
+                    </th>
+                    <th scope="col" className="px-4 py-2 whitespace-nowrap">
+                      จำนวนที่ขายได้
+                    </th>
+                    <th scope="col" className="px-4 py-2">
+                      วันที่อัปเดต
+                    </th>
+                    <th scope="col" className="px-4 py-2">
+                      จัดการ
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {filteredProducts.map((item, index) => (
+                    <tr
+                      key={index}
+                      className={`text-center ${
+                        index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                      } hover:bg-gray-100 transition duration-200`}
+                    >
+                      <th
+                        scope="row"
+                        className="border-b border-gray-300 px-4 py-2"
+                      >
+                        {index + 1}
+                      </th>
+                      <td className="border-b border-gray-300 px-4 py-2">
+                        {item.images.length > 0 ? (
+                          <img
+                            className="w-24 h-24 rounded-lg shadow-md object-cover"
+                            src={item.images[0].url}
+                            alt={item.title}
+                          />
+                        ) : (
+                          <div className="w-24 h-24 bg-gray-200 rounded-md flex items-center justify-center shadow-sm text-gray-500">
+                            No Image
+                          </div>
+                        )}
+                      </td>
+                      <td className="border-b border-gray-300 px-4 py-2">
+                        {item.title}
+                      </td>
+                      <td className="border-b border-gray-300 px-4 py-2">
+                        {item.description}
+                      </td>
+                      <td className="border-b border-gray-300 px-4 py-2 text-green-600 font-semibold whitespace-nowrap">
+                        {numberFormat(item.price)} ฿
+                      </td>
+                      <td className="border-b border-gray-300 px-4 py-2">
+                        {item.quantity}
+                      </td>
+                      <td className="border-b border-gray-300 px-4 py-2">
+                        {item.sold}
+                      </td>
+                      <td className="border-b border-gray-300 px-4 py-2 whitespace-nowrap">
+                        {dateFormat(item.updatedAt)}
+                      </td>
+                      <td className="border-b border-gray-300 px-4 py-2 flex justify-center gap-2">
+                        <Link
+                          to={`/admin/product/${item.id}`}
+                          className="bg-blue-500 text-white p-2 rounded-md shadow-md hover:bg-blue-600 hover:scale-105 transition duration-200"
+                        >
+                          <Pencil />
+                        </Link>
+                        <button
+                          className="bg-red-500 text-white p-2 rounded-md shadow-md hover:bg-red-600 hover:scale-105 transition duration-200"
+                          onClick={() => handleDelete(item.id)}
+                        >
+                          <Trash />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </form>
       </div>
