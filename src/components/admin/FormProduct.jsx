@@ -31,7 +31,7 @@ const FormProduct = () => {
 
   useEffect(() => {
     getCategory();
-    getProduct(100);
+    getProduct(200);
   }, []);
 
   const handleOnChange = (e) => {

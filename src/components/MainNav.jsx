@@ -113,14 +113,6 @@ function MainNav() {
                     <i className="bi bi-clock-history mr-2"></i> History
                   </Link>
 
-                  {/* เพิ่ม Edit Profile
-                  <Link
-                    to={"/user/edit-profile"} // ลิงก์ไปที่หน้า Edit Profile
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    <i className="bi bi-pencil-fill mr-2"></i> Edit Profile
-                  </Link> */}
-
                   {/* ปุ่ม Admin Control */}
                   <Link
                     to={"/admin/manage"}
