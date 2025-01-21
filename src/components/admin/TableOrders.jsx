@@ -9,7 +9,8 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 const TableOrders = () => {
   const token = useEcomStore((state) => state.token);
   const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true); // เพิ่มสถานะ loading
+  const [loading, setLoading] = useState(true); // สถานะการโหลดทั้งหมด
+  const [dropdownLoading, setDropdownLoading] = useState(false); // สถานะการโหลดใน dropdown
 
   useEffect(() => {
     handleGetOrder(token);
@@ -24,18 +25,21 @@ const TableOrders = () => {
       })
       .catch((err) => {
         console.log(err);
-        setLoading(false); // จบโหลด แม้เกิดข้อผิดพลาด
+        setLoading(false); // จบโหลดแม้เกิดข้อผิดพลาด
       });
   };
 
   const handleChangeOrderStatus = (token, orderId, orderStatus) => {
+    setDropdownLoading(true); // เริ่มโหลดใน dropdown
     changeOrderStatus(token, orderId, orderStatus)
       .then(() => {
         toast.success("อัปเดตสถานะสำเร็จ!!!");
-        handleGetOrder(token);
+        handleGetOrder(token); // ดึงข้อมูลใหม่
+        setDropdownLoading(false); // จบโหลดใน dropdown
       })
       .catch((err) => {
         console.log(err);
+        setDropdownLoading(false); // จบโหลดในกรณีเกิดข้อผิดพลาด
       });
   };
 
@@ -132,15 +136,23 @@ const TableOrders = () => {
                     <td className="border-b border-gray-300 px-4 py-2">
                       <select
                         value={item.orderStatus}
-                        onChange={(e) =>
-                          handleChangeOrderStatus(token, item.id, e.target.value)
-                        }
+                        onChange={(e) => {
+                          // เริ่มโหลดเมื่อมีการเปลี่ยนแปลงสถานะ
+                          setDropdownLoading(true);
+                          handleChangeOrderStatus(token, item.id, e.target.value);
+                        }}
                         className="block w-full px-3 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                       >
-                        <option value="กำลังเตรียมพัสดุ">กำลังเตรียมพัสดุ</option>
-                        <option value="กำลังจัดส่ง">กำลังจัดส่ง</option>
-                        <option value="จัดส่งสำเร็จ">จัดส่งสำเร็จ</option>
-                        <option value="จัดส่งไม่สำเร็จ">จัดส่งไม่สำเร็จ</option>
+                        {dropdownLoading ? (
+                          <option value="">กำลังโหลด...</option>
+                        ) : (
+                          <>
+                            <option value="กำลังเตรียมพัสดุ">กำลังเตรียมพัสดุ</option>
+                            <option value="กำลังจัดส่ง">กำลังจัดส่ง</option>
+                            <option value="จัดส่งสำเร็จ">จัดส่งสำเร็จ</option>
+                            <option value="จัดส่งไม่สำเร็จ">จัดส่งไม่สำเร็จ</option>
+                          </>
+                        )}
                       </select>
                     </td>
                   </tr>
