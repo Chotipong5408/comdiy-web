@@ -28,6 +28,7 @@ const FormProduct = () => {
   const [form, setForm] = useState(initialState);
   const [search, setSearch] = useState(""); // เพิ่ม state สำหรับคำค้นหา
   const [loading, setLoading] = useState(false);
+  const [deletingId, setDeletingId] = useState(null);
 
   useEffect(() => {
     getCategory();
@@ -65,12 +66,16 @@ const FormProduct = () => {
 
   const handleDelete = async (id) => {
     if (window.confirm("คุณแน่ใจที่จะลบใช่หรือไม่?")) {
+      setDeletingId(id); // ตั้งค่าสินค้าที่กำลังลบ
       try {
         const res = await deleteProduct(token, id);
         toast.success("ลบ สินค้าเรียบร้อยแล้ว");
         getProduct(token);
       } catch (err) {
+        toast.error("เกิดข้อผิดพลาดในการลบสินค้า");
         console.log(err);
+      } finally {
+        setDeletingId(null); // รีเซ็ตสถานะเมื่อเสร็จสิ้น
       }
     }
     setTimeout(() => {
@@ -269,8 +274,13 @@ const FormProduct = () => {
                         <button
                           className="bg-red-500 text-white p-2 rounded-md shadow-md hover:bg-red-600 hover:scale-105 transition duration-200"
                           onClick={() => handleDelete(item.id)}
+                          disabled={deletingId === item.id} // ปิดการใช้งานปุ่มขณะกำลังลบ
                         >
-                          <Trash />
+                          {deletingId === item.id ? (
+                            <ClipLoader size={20} color="#fff" />
+                          ) : (
+                            <Trash />
+                          )}
                         </button>
                       </td>
                     </tr>
