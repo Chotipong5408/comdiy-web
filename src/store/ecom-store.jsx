@@ -73,7 +73,7 @@ const ecomStore = (set, get) => ({
     }
   },
 
-  getProduct: async (count = 200) => {
+  getProduct: async (count = 1000) => {
     try {
       const res = await listProduct(count);
       if (res.data && Array.isArray(res.data)) {
