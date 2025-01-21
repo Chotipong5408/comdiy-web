@@ -80,14 +80,14 @@ const HistoryCard = () => {
                     <div className="inline-flex items-center">
                       <div className="w-[64px] h-[64px]">
                         <svg
-                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns="https://www.w3.org/2000/svg"
                           width="45"
                           height="50"
                           viewBox="0 0 64 64"
                           fill="none"
                           className="injected-svg"
                           data-src="/assets/images/icons/truck.svg"
-                          xmlnsXlink="http://www.w3.org/1999/xlink"
+                          xmlnsXlink="https://www.w3.org/1999/xlink"
                         >
                           <g clipPath="url(#clip0-15)">
                             <path
