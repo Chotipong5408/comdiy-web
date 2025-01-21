@@ -16,15 +16,17 @@ function MainNav() {
     setIsOpen(!isOpen);
   };
 
-  const profileImage = user && user.profileImage 
-  ? user.profileImage 
-  : "https://cdn-icons-png.flaticon.com/256/3177/3177440.png";
+  const profileImage =
+    user && user.profileImage
+      ? user.profileImage
+      : "https://cdn-icons-png.flaticon.com/256/3177/3177440.png";
 
   const handleLogout = () => {
     setIsLoading(true); // ตั้งค่า isLoading เป็น true ก่อนทำการ logout
     logout(); // เรียกใช้งาน logout function
     setTimeout(() => {
       setIsLoading(false); // ตั้งค่า isLoading เป็น false หลังจาก logout
+      window.location.reload(); // รีเฟรชหน้าเว็บหลังจาก logout
     }, 1000); // ตั้งเวลาให้เหมือนการทำงานจริง (ตัวอย่าง 2 วินาที)
   };
 
