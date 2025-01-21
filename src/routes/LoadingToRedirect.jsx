@@ -1,40 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
-import ClipLoader from "react-spinners/ClipLoader"; // นำเข้า ClipLoader
-
-const style = {
-  fontFamily: "'Sarabun', sans-serif", // กำหนดฟอนต์ที่ต้องการ
-  textAlign: "center", // จัดให้อยู่ตรงกลาง
-  marginTop: "20%",
-};
+import React, { useEffect, useState } from 'react'
+import { Navigate } from 'react-router-dom'
 
 const LoadingToRedirect = () => {
-  const [count, setCount] = useState(4);
-  const [redirect, setRedirect] = useState(false);
+    const [count, setCount] = useState(3)
+    const [redirect, setRedirect] = useState(false)
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCount((currentCount) => {
-        if (currentCount === 1) {
-          clearInterval(interval);
-          setRedirect(true);
-        }
-        return currentCount - 1;
-      });
-    }, 1000);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCount((currentCount) => {
+                if (currentCount === 1) {
+                    clearInterval(interval)
+                    setRedirect(true)
+                }
+                return currentCount - 1
+            })
 
-    return () => clearInterval(interval);
-  }, []);
+        }, 1000)
 
-  if (redirect) {
-    return <Navigate to="/" />;
-  }
+        return () => clearInterval(interval)
+    }, [])
 
-  return (
-    <div style={style}>
-      <ClipLoader size={80} color="#3498db" /> {/* ใช้ ClipLoader */}
-    </div>
-  );
-};
+    if (redirect) {
+        return <Navigate to={'/'} />
+    }
 
-export default LoadingToRedirect;
+    return (
+        <div>No Permission, Redirect in {count}</div>
+    )
+}
+
+export default LoadingToRedirect
