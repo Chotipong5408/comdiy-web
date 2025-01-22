@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import ClipLoader from "react-spinners/ClipLoader"; // นำเข้า ClipLoader
+import ClipLoader from "react-spinners/ClipLoader";
 
-const style = {
-  fontFamily: "'Sarabun', sans-serif", // กำหนดฟอนต์ที่ต้องการ
-  textAlign: "center", // จัดให้อยู่ตรงกลาง
-  marginTop: "20%",
-};
-
-const LoadingToRedirect = () => {
+const LoadingToRedirect = ({ isAdmin }) => {
   const [count, setCount] = useState(6);
   const [redirect, setRedirect] = useState(false);
 
@@ -31,8 +25,43 @@ const LoadingToRedirect = () => {
   }
 
   return (
-    <div style={style}>
-      <ClipLoader size={80} color="#3498db" /> {/* ใช้ ClipLoader */}
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        fontFamily: "'Sarabun', sans-serif",
+      }}
+    >
+      <ClipLoader size={80} color="#3498db" />
+      {isAdmin ? (
+        <p
+          style={{
+            marginTop: "20px",
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "green",
+          }}
+        >
+          ตรวจสอบสิทธิ์ผ่าน
+        </p>
+      ) : (
+        <p
+          style={{
+            marginTop: "20px",
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "red",
+          }}
+        >
+          คุณไม่ได้รับสิทธิ์เข้าหน้านี้
+        </p>
+      )}
+      <p style={{ fontSize: "18px", color: "#555" }}>
+        ระบบจะนำคุณกลับสู่หน้าหลักใน {count} วินาที
+      </p>
     </div>
   );
 };
