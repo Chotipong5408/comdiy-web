@@ -41,7 +41,7 @@ const LoadingToRedirect = () => {
           marginTop: "20px",
           fontSize: "20px",
           fontWeight: "bold",
-          color: "green",
+          color: "#3498db",
         }}
       >
         กำลังโหลด...
