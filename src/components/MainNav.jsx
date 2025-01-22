@@ -44,41 +44,45 @@ function MainNav() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo and Main Links */}
-          <div className="flex items-center gap-6">
-            <Link
-              to={"/"}
-              className="text-3xl font-bold bg-white flex items-center gap-2"
-            >
-              <i className="bi bi-pc-display text-3xl"></i> COMDIY
-            </Link>
+          <div className="flex items-center gap-6 w-full">
+            <div className="flex items-center gap-6">
+              <Link
+                to={"/"}
+                className="text-3xl font-bold bg-white flex items-center gap-2"
+              >
+                <i className="bi bi-pc-display text-3xl"></i> COMDIY
+              </Link>
+
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-blue-100 text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                    : "hover:bg-gray-100 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                }
+                to={"/"}
+              >
+                <i className="bi bi-house-fill mr-1 text-lg"></i>HOME
+              </NavLink>
+
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-blue-100 text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                    : "hover:bg-gray-100 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                }
+                to={"/shop"}
+              >
+                <i className="bi bi-bag-fill mr-1 text-lg"></i>SHOP
+              </NavLink>
+            </div>
 
             <NavLink
               className={({ isActive }) =>
-                isActive
-                  ? "bg-blue-100 text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-                  : "hover:bg-gray-100 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-              }
-              to={"/"}
-            >
-              <i className="bi bi-house-fill mr-1 text-lg"></i>HOME
-            </NavLink>
-
-            <NavLink
-              className={({ isActive }) =>
-                isActive
-                  ? "bg-blue-100 text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-                  : "hover:bg-gray-100 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-              }
-              to={"/shop"}
-            >
-              <i className="bi bi-bag-fill mr-1 text-lg"></i>SHOP
-            </NavLink>
-
-            <NavLink
-              className={({ isActive }) =>
-                isActive
-                  ? "bg-blue-100 text-blue-600 px-3 py-2 rounded-md text-sm font-medium relative"
-                  : "hover:bg-gray-100 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium relative"
+                `ml-auto ${
+                  isActive
+                    ? "bg-blue-100 text-blue-600 px-3 py-2 rounded-md text-sm font-medium relative"
+                    : "hover:bg-gray-100 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium relative"
+                }`
               }
               to={"/cart"}
             >
@@ -107,23 +111,19 @@ function MainNav() {
               </button>
 
               {isOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-20">
+                <div className="absolute mt-2 w-48 bg-white rounded-md shadow-lg z-20">
                   <Link
                     to={"/user/history"}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     <i className="bi bi-clock-history mr-2"></i> History
                   </Link>
-
-                  {/* ปุ่ม Admin Control */}
                   <Link
                     to={"/admin/manage"}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     <i className="bi bi-gear-fill mr-2"></i> Admin Control
                   </Link>
-
-                  {/* ปุ่ม Logout */}
                   <button
                     onClick={handleLogout}
                     className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
@@ -135,7 +135,7 @@ function MainNav() {
             </div>
           ) : (
             <div style={style}>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 whitespace-nowrap">
                 <NavLink
                   className={({ isActive }) =>
                     isActive
