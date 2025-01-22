@@ -41,10 +41,10 @@ const LoadingToRedirect = () => {
           marginTop: "20px",
           fontSize: "20px",
           fontWeight: "bold",
-          color: "blue",
+          color: "green",
         }}
       >
-        กำลังตรวจสอบสิทธื์
+        กำลังโหลด...
       </p>
       <p style={{ fontSize: "18px", color: "#555" }}>
         ระบบจะนำคุณเปลี่ยนหน้าใน {count} วินาที
