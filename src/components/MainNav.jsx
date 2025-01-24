@@ -50,7 +50,7 @@ function MainNav() {
                 to={"/"}
                 className="text-3xl font-bold bg-white flex items-center gap-2"
               >
-                <i className="bi bi-pc-display text-3xl"></i> COMDIY
+                <i className="bi bi-pc-display text-3xl"></i> COMD
               </Link>
 
               <NavLink
