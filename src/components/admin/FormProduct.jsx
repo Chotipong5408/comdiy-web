@@ -8,6 +8,8 @@ import { Pencil, Trash } from "lucide-react";
 import { numberFormat } from "../../utils/number";
 import { dateFormat } from "../../utils/dateformat";
 import { ClipLoader } from "react-spinners";
+import Swal from "sweetalert2";
+import "./../../../public/sweetalert2.css";
 
 const initialState = {
   title: "",
@@ -65,22 +67,51 @@ const FormProduct = () => {
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm("คุณแน่ใจที่จะลบใช่หรือไม่?")) {
-      setDeletingId(id); // ตั้งค่าสินค้าที่กำลังลบ
+    const result = await Swal.fire({
+      title: "ยืนยัน",
+      text: "คุณแน่ใจที่จะลบสินค้านี้ใช่หรือไม่?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "ยืนยัน",
+      cancelButtonText: "ปิด",
+      customClass: {
+        title: "swal-title",
+        popup: "swal-popup",
+        confirmButton: "swal-confirm",
+        cancelButton: "swal-cancel",
+      },
+    });
+
+    if (result.isConfirmed) {
+      setDeletingId(id);
       try {
-        const res = await deleteProduct(token, id);
-        toast.success("ลบ สินค้าเรียบร้อยแล้ว");
+        await deleteProduct(token, id);
+
+        // ✅ แจ้งเตือนสำเร็จ โดยไม่มีปุ่ม OK และหายไปอัตโนมัติ
+        Swal.fire({
+          title: "ลบสินค้าเรียบร้อยแล้ว",
+          icon: "success",
+          timer: 1500, // แจ้งเตือน 1.5 วินาทีแล้วหายไป
+          showConfirmButton: false, // ไม่แสดงปุ่ม OK
+          customClass: { popup: "swal-popup" },
+        });
+
         getProduct(token);
       } catch (err) {
-        toast.error("เกิดข้อผิดพลาดในการลบสินค้า");
+        Swal.fire({
+          title: "เกิดข้อผิดพลาดในการลบสินค้า",
+          icon: "error",
+          customClass: { popup: "swal-popup" },
+        });
         console.log(err);
       } finally {
-        setDeletingId(null); // รีเซ็ตสถานะเมื่อเสร็จสิ้น
+        setDeletingId(null);
       }
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000); // รอให้ Swal หายไปก่อนรีโหลดหน้า
     }
-    setTimeout(() => {
-      window.location.reload();
-    }, 500);
   };
 
   const filteredProducts = products.filter(
