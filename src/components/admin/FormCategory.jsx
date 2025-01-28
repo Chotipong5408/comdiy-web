@@ -8,6 +8,8 @@ import {
 import useEcomStore from "../../store/ecom-store";
 import { toast } from "react-toastify";
 import { ScaleLoader } from "react-spinners"; // Import ScaleLoader for loading spinner
+import Swal from "sweetalert2";
+import "./../../../public/sweetalert2.css";
 
 const FormCategory = () => {
   // State & Store
@@ -41,10 +43,12 @@ const FormCategory = () => {
         res = await updateCategory(token, editingId, { name });
         toast.success(`แก้ไขหมวด ${res.data.name} สำเร็จ!!!`);
         setEditingId(null); // Exit edit mode
-  
+
         // Find the index of the category being edited and update its name
         const updatedCategories = categories.map((category) =>
-          category.id === editingId ? { ...category, name: res.data.name } : category
+          category.id === editingId
+            ? { ...category, name: res.data.name }
+            : category
         );
         useEcomStore.setState({ categories: updatedCategories }); // Update store with the new category list
       } else {
@@ -63,24 +67,49 @@ const FormCategory = () => {
       setLoading(false);
     }
   };
-  
 
   // Handle Remove Category
   const handleRemove = async (id) => {
-    const confirmDelete = window.confirm(
-      "คุณแน่ใจว่าต้องการลบหมวดหมู่นี้หรือไม่?"
-    );
-    if (!confirmDelete) return; // Abort if not confirmed
-    setLoading(true); // Start loading during API request
+    const result = await Swal.fire({
+      title: "ยืนยัน",
+      text: "คุณแน่ใจว่าต้องการลบหมวดหมู่นี้หรือไม่?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "ยืนยัน",
+      cancelButtonText: "ปิด",
+      customClass: {
+        title: "swal-title",
+        popup: "swal-popup",
+        confirmButton: "swal-confirm",
+        cancelButton: "swal-cancel",
+      },
+    });
+
+    if (!result.isConfirmed) return; // ถ้าไม่กดยืนยัน ให้หยุดทำงาน
+
+    setLoading(true);
     try {
       const res = await removeCategory(token, id);
-      toast.success(`ลบ ${res.data.name} สำเร็จ`);
-      getCategory(token); // Refresh category list
+
+      // ✅ แจ้งเตือนสำเร็จ โดยไม่มีปุ่ม OK และหายไปเอง
+      Swal.fire({
+        title: `ลบ ${res.data.name} สำเร็จ`,
+        icon: "success",
+        timer: 1500, // หายไปเองใน 1.5 วินาที
+        showConfirmButton: false,
+        customClass: { popup: "swal-popup" },
+      });
+
+      getCategory(token); // รีเฟรชรายการหมวดหมู่
     } catch (err) {
       console.log(err);
-      toast.error("เกิดข้อผิดพลาดในการลบหมวดหมู่");
+      Swal.fire({
+        title: "เกิดข้อผิดพลาดในการลบหมวดหมู่",
+        icon: "error",
+        customClass: { popup: "swal-popup" },
+      });
     } finally {
-      setLoading(false); // Stop loading after action
+      setLoading(false);
     }
   };
 
