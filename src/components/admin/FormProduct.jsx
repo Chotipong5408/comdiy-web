@@ -74,6 +74,7 @@ const FormProduct = () => {
       showCancelButton: true,
       confirmButtonText: "ยืนยัน",
       cancelButtonText: "ปิด",
+      reverseButtons: true,
       customClass: {
         title: "swal-title",
         popup: "swal-popup",
