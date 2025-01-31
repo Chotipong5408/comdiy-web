@@ -43,7 +43,6 @@ const ListCart = () => {
     <div style={style}>
       <div className="bg-gray-100 rounded-lg p-6 min-h-screen relative">
         {/* Header */}
-        <h1 className="text-2xl font-bold text-center mb-6">ตะกร้าสินค้า</h1>
 
         {/* Right - Total */}
         <div className="bg-white p-6 rounded-lg shadow-lg w-full sm:w-[300px] fixed bottom-4 left-1/2 transform -translate-x-1/2 space-y-4">

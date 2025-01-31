@@ -38,7 +38,6 @@ const CartCard = () => {
 
   return (
 <div style={style} className="p-4">
-  <h1 className="text-2xl font-bold text-center mb-6">ตะกร้าของคุณ</h1>
   <div className="border p-4 rounded-lg shadow-lg bg-white">
     {carts.length > 0 ? (
       carts.map((item, index) => (
