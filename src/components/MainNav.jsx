@@ -50,6 +50,10 @@ function MainNav() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const style = {
+    fontFamily: "'Sarabun', sans-serif", // กำหนดฟอนต์ที่ต้องการ
+  };
+
   return (
     <div className="bg-white shadow-md sticky top-0 z-50">
       <div className="container mx-auto px-4">
@@ -156,22 +160,24 @@ function MainNav() {
                 )}
               </div>
             ) : (
-              <div className="flex space-x-2">
-                <NavLink
-                  to={"/register"}
-                  className="hover:bg-gray-100 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium flex items-center"
-                >
-                  <i className="bi bi-person-plus-fill text-lg ml-1"></i>
-                  <span className="hidden sm:inline">สร้างบัญชี</span>
-                </NavLink>
+              <div style={style}>
+                <div className="flex space-x-2">
+                  <NavLink
+                    to={"/register"}
+                    className="hover:bg-gray-100 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium flex items-center"
+                  >
+                    <i className="bi bi-person-plus-fill text-lg ml-1"></i>
+                    <span className="hidden sm:inline">สร้างบัญชี</span>
+                  </NavLink>
 
-                <NavLink
-                  to={"/login"}
-                  className="hover:bg-gray-100 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium flex items-center"
-                >
-                  <i className="bi bi-box-arrow-in-right text-lg ml-1"></i>
-                  <span className="hidden sm:inline">ลงชื่อเข้าใช้</span>
-                </NavLink>
+                  <NavLink
+                    to={"/login"}
+                    className="hover:bg-gray-100 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium flex items-center"
+                  >
+                    <i className="bi bi-box-arrow-in-right text-lg ml-1"></i>
+                    <span className="hidden sm:inline">ลงชื่อเข้าใช้</span>
+                  </NavLink>
+                </div>
               </div>
             )}
           </div>
@@ -184,10 +190,7 @@ function MainNav() {
           <NavLink to={"/"} className="block px-4 py-2 text-sm text-black">
             <i className="bi bi-house-fill mr-1 text-lg"></i>HOME
           </NavLink>
-          <NavLink
-            to={"/shop"}
-            className="block px-4 py-2 text-sm text-black"
-          >
+          <NavLink to={"/shop"} className="block px-4 py-2 text-sm text-black">
             <i className="bi bi-bag-fill mr-1 text-lg"></i>SHOP
           </NavLink>
         </div>
