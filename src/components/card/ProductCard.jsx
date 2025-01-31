@@ -62,7 +62,7 @@ const ProductCard = ({ item, disablePopup }) => {
           transition={{ duration: 0.3 }}
         >
           <div
-            className="bg-white border-2 rounded-lg shadow-lg p-4 sm:p-5 w-[160px] sm:w-64 max-w-sm flex flex-col justify-between cursor-pointer hover:scale-105 hover:shadow-xl transition-all mb-8 sm:mb-6 min-h-[320px] sm:min-h-[340px] mx-auto sm:mx-0"
+            className="bg-white border-2 rounded-lg shadow-lg p-4 sm:p-5 w-[160px] sm:w-64 max-w-sm flex flex-col justify-between cursor-pointer hover:scale-105 hover:shadow-xl transition-all mb-4 sm:mb-4 min-h-[320px] sm:min-h-[340px] mx-auto sm:mx-0"
             onClick={() => openPopup(item)}
           >
             {/* รูปสินค้า */}
@@ -100,7 +100,7 @@ const ProductCard = ({ item, disablePopup }) => {
                   e.stopPropagation();
                   handleAddToCart(item);
                 }}
-                className={`bg-blue-500 rounded-md p-2 sm:p-3 text-white hover:bg-blue-700 shadow-md transition-all ${
+                className={`bg-blue-500 rounded-md p-3 sm:p-2 lg:p-2 text-white hover:bg-blue-700 shadow-md transition-all ${
                   loading ? "cursor-not-allowed opacity-50" : ""
                 }`}
                 disabled={loading}

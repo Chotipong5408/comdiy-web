@@ -60,9 +60,10 @@ const Shop = () => {
           )}
 
           {/* Product List */}
-          <div className="w-full p-4">
-            {/* เพิ่มระยะห่างระหว่างสินค้า */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 justify-center sm:justify-start mx-auto">
+          <div className="w-full p-4 overflow-y-auto">
+            <p className="text-2xl font-bold mb-"></p>
+            <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              {/* Product Card */}
               {products.map((item, index) => (
                 <ProductCard key={index} item={item} />
               ))}
