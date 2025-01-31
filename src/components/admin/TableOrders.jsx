@@ -64,7 +64,7 @@ const TableOrders = () => {
 
   return (
     <div style={style}>
-      <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg">
+      <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg whitespace-nowrap">
         <h1 className="text-2xl font-bold text-center mb-6">จัดการคำสั่งซื้อ</h1>
 
         {/* แสดงตัวโหลดระหว่างโหลด */}
