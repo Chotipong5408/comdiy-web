@@ -42,10 +42,8 @@ const ListCart = () => {
   return (
     <div style={style}>
       <div className="bg-gray-100 rounded-lg p-6 min-h-screen relative">
-        {/* Header */}
-
         {/* Right - Total */}
-        <div className="bg-white p-6 rounded-lg shadow-lg w-full sm:w-[300px] fixed bottom-4 left-1/2 transform -translate-x-1/2 space-y-4">
+        <div className="bg-white p-6 rounded-lg shadow-lg w-full sm:w-[300px] fixed bottom-4 sm:bottom-2 sm:right-4 right-0 space-y-4">
           <p className="text-2xl font-bold text-gray-800">ยอดรวม</p>
           <div className="flex justify-between text-lg font-semibold">
             <span>รวมสุทธิ</span>
@@ -62,12 +60,18 @@ const ListCart = () => {
                 disabled={cart.length < 1 || loading} // ปิดปุ่มระหว่างการโหลด
                 onClick={handleSaveCart}
                 className={`bg-blue-500 w-full rounded-md text-white py-3 shadow-md transition-all ${
-                  loading ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-700"
+                  loading
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-blue-700"
                 }`}
               >
                 {loading ? (
                   <>
-                    <ClipLoader size={20} color="#fff" className="inline-block mr-2" />
+                    <ClipLoader
+                      size={20}
+                      color="#fff"
+                      className="inline-block mr-2"
+                    />
                     กำลังโหลด...
                   </>
                 ) : (
