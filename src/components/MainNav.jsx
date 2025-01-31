@@ -181,12 +181,12 @@ function MainNav() {
       {/* Mobile Menu - Fixed issue */}
       {isMobileMenuOpen && (
         <div className="absolute top-full left-0 w-full bg-white shadow-md sm:hidden">
-          <NavLink to={"/"} className="block px-4 py-2 text-sm text-gray-700">
+          <NavLink to={"/"} className="block px-4 py-2 text-sm text-black">
             <i className="bi bi-house-fill mr-1 text-lg"></i>HOME
           </NavLink>
           <NavLink
             to={"/shop"}
-            className="block px-4 py-2 text-sm text-gray-700"
+            className="block px-4 py-2 text-sm text-black"
           >
             <i className="bi bi-bag-fill mr-1 text-lg"></i>SHOP
           </NavLink>
