@@ -143,7 +143,7 @@ const HistoryCard = () => {
                     <span
                       className={`${getStatusColor(
                         item.orderStatus
-                      )} px-3 py-1 rounded-full font-semibold text-sm`}
+                      )} px-3 py-1 rounded-full font-semibold text-sm text-left whitespace-nowrap`}
                     >
                       {item.orderStatus}
                     </span>
@@ -185,7 +185,7 @@ const HistoryCard = () => {
                                     alt={
                                       product.product.title || "รูปภาพสินค้า"
                                     }
-                                    className="w-32 h-32 object-cover rounded mb-2" // ขยายขนาดรูปภาพและเพิ่มระยะห่างข้างล่าง
+                                    className="w-32 h-32 object-contain rounded mb-2" // ขยายขนาดรูปภาพและเพิ่มระยะห่างข้างล่าง
                                   />
                                 ) : (
                                   <div className="w-32 h-32 bg-gray-300 rounded mb-2" />
@@ -227,16 +227,6 @@ const HistoryCard = () => {
             ))}
           </div>
         )}
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
         <br />
       </div>
     </div>

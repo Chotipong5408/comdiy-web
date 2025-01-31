@@ -34,12 +34,14 @@ const Home = () => {
   return (
     <div style={style}>
       <div className="bg-gray-100 min-h-screen p-4">
+        {/* Content Carousel */}
         <ContentCarousel />
 
-        <h2 className="text-2xl font-bold text-center my-6">สินค้าขายดี!!!</h2>
-        {/* หากกำลังโหลดให้แสดง SyncLoader
-
- */}
+        {/* สินค้าขายดี */}
+        <h2 className="text-2xl sm:text-xl md:text-3xl font-bold text-center my-6">
+          สินค้าขายดี!!!
+        </h2>
+        {/* หากกำลังโหลดให้แสดง SyncLoader */}
         {loadingBestSeller ? (
           <div className="flex justify-center">
             <SyncLoader
@@ -55,10 +57,11 @@ const Home = () => {
         <br />
         <br />
 
-        <h2 className="text-2xl font-bold text-center my-6">สินค้าใหม่!!!</h2>
-        {/* หากกำลังโหลดให้แสดง SyncLoader
-
- */}
+        {/* สินค้าใหม่ */}
+        <h2 className="text-2xl sm:text-xl md:text-3xl font-bold text-center my-6">
+          สินค้าใหม่!!!
+        </h2>
+        {/* หากกำลังโหลดให้แสดง SyncLoader */}
         {loadingNewProduct ? (
           <div className="flex justify-center">
             <SyncLoader
