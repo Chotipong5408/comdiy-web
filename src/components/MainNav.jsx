@@ -62,7 +62,7 @@ function MainNav() {
           <div className="flex items-center gap-6">
             <Link
               to={"/"}
-              className="font-bold bg-white flex items-center gap-2 text-lg sm:text-3xl"
+              className="font-bold bg-white flex items-center gap-1 text-lg sm:text-3xl"
             >
               <i className="bi bi-pc-display text-lg sm:text-3xl"></i>
               <span className="text-lg sm:text-3xl">COMDIY</span>
@@ -95,7 +95,7 @@ function MainNav() {
           {/* Mobile Menu Button */}
           <button
             onClick={toggleMobileMenu}
-            className="sm:hidden text-lg px-3 py-2"
+            className="sm:hidden text-2xl px-3 py-2"
           >
             {isMobileMenuOpen ? (
               <i className="bi bi-list"></i>
