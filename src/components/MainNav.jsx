@@ -65,7 +65,7 @@ function MainNav() {
               className="font-bold bg-white flex items-center gap-1 text-lg sm:text-3xl"
             >
               <i className="bi bi-pc-display text-lg sm:text-3xl"></i>
-              <span className="text-lg sm:text-3xl">COMfs</span>
+              <span className="text-lg sm:text-3xl">COMDIY</span>
             </Link>
 
             <div className="hidden sm:flex gap-6">
