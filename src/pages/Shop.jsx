@@ -45,7 +45,7 @@ const Shop = () => {
               onClick={toggleSearch} // คลิกที่พื้นหลังเพื่อปิด
             >
               <div
-                className="bg-white p-6 rounded-lg shadow-lg w-11/12 max-w-md relative z-50"
+                className="bg-white p-6 rounded-lg shadow-lg w-11/12 max-w-md relative z-50 overflow-y-auto"
                 onClick={(e) => e.stopPropagation()} // ป้องกันปิดเมื่อคลิกด้านใน
               >
                 <button
