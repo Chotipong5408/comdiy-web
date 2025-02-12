@@ -3,7 +3,6 @@ import useEcomStore from "../../store/ecom-store";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import { numberFormat } from "../../utils/number";
-import Fuse from "fuse.js";
 
 const SearchCard = () => {
   const getProduct = useEcomStore((state) => state.getProduct);
@@ -17,12 +16,6 @@ const SearchCard = () => {
   const [price, setPrice] = useState([1000, 100000]);
   const [ok, setOk] = useState(false);
 
-  const fuse = new Fuse(products, {
-    keys: ["name"], // หาคำจากชื่อสินค้า
-    includeScore: true, // แสดงคะแนนที่ได้จากการจับคู่
-    threshold: 0.3, // ความยืดหยุ่นในการค้นหา (ค่าต่ำคือแม่นยำสูงขึ้น)
-  });
-
   useEffect(() => {
     getCategory();
   }, []);
@@ -30,8 +23,7 @@ const SearchCard = () => {
   useEffect(() => {
     const delay = setTimeout(() => {
       if (text) {
-        const results = fuse.search(text); // ทำการค้นหาด้วย Fuse.js
-        actionSearchFilters({ query: results.map((result) => result.item) });
+        actionSearchFilters({ query: text });
       } else {
         getProduct();
       }
@@ -77,14 +69,15 @@ const SearchCard = () => {
 
       {/* ค้นหาจากข้อความ */}
       <div className="flex items-center border rounded-md w-full mb-4 px-2 py-1 focus-within:ring-2 focus-within:ring-blue-500">
-        <i className="bi bi-search text-gray-400 mr-2"></i>
-        <input
-          onChange={(e) => setText(e.target.value)}
-          type="text"
-          placeholder="ค้นหาสินค้า...."
-          className="w-full focus:outline-none"
-        />
-      </div>
+  <i className="bi bi-search text-gray-400 mr-2"></i>
+  <input
+    onChange={(e) => setText(e.target.value)}
+    type="text"
+    placeholder="ค้นหาสินค้า...."
+    className="w-full focus:outline-none"
+  />
+</div>
+
 
       <hr className="mb-4" />
 
