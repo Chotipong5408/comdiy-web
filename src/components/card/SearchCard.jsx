@@ -23,7 +23,8 @@ const SearchCard = () => {
   useEffect(() => {
     const delay = setTimeout(() => {
       if (text) {
-        actionSearchFilters({ query: text });
+        // เปลี่ยนทั้ง query และชื่อสินค้าหรือข้อมูลในฐานข้อมูลให้เป็นตัวพิมพ์เดียวกัน
+        actionSearchFilters({ query: text.toLowerCase() });
       } else {
         getProduct();
       }
@@ -69,15 +70,14 @@ const SearchCard = () => {
 
       {/* ค้นหาจากข้อความ */}
       <div className="flex items-center border rounded-md w-full mb-4 px-2 py-1 focus-within:ring-2 focus-within:ring-blue-500">
-  <i className="bi bi-search text-gray-400 mr-2"></i>
-  <input
-    onChange={(e) => setText(e.target.value)}
-    type="text"
-    placeholder="ค้นหาสินค้า...."
-    className="w-full focus:outline-none"
-  />
-</div>
-
+        <i className="bi bi-search text-gray-400 mr-2"></i>
+        <input
+          onChange={(e) => setText(e.target.value)}
+          type="text"
+          placeholder="ค้นหาสินค้า...."
+          className="w-full focus:outline-none"
+        />
+      </div>
 
       <hr className="mb-4" />
 
