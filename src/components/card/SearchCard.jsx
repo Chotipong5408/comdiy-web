@@ -3,6 +3,7 @@ import useEcomStore from "../../store/ecom-store";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import { numberFormat } from "../../utils/number";
+import Fuse from "fuse.js";
 
 const SearchCard = () => {
   const getProduct = useEcomStore((state) => state.getProduct);
@@ -16,6 +17,12 @@ const SearchCard = () => {
   const [price, setPrice] = useState([1000, 100000]);
   const [ok, setOk] = useState(false);
 
+  const fuse = new Fuse(products, {
+    keys: ["name"], // หาคำจากชื่อสินค้า
+    includeScore: true, // แสดงคะแนนที่ได้จากการจับคู่
+    threshold: 0.3, // ความยืดหยุ่นในการค้นหา (ค่าต่ำคือแม่นยำสูงขึ้น)
+  });
+
   useEffect(() => {
     getCategory();
   }, []);
@@ -23,8 +30,8 @@ const SearchCard = () => {
   useEffect(() => {
     const delay = setTimeout(() => {
       if (text) {
-        // เปลี่ยนข้อความค้นหาเป็นตัวพิมพ์เล็กทั้งหมดเพื่อให้การค้นหาผ่านได้ทั้งตัวพิมพ์ใหญ่และเล็ก
-        actionSearchFilters({ query: text.toLowerCase() });
+        const results = fuse.search(text); // ทำการค้นหาด้วย Fuse.js
+        actionSearchFilters({ query: results.map((result) => result.item) });
       } else {
         getProduct();
       }
