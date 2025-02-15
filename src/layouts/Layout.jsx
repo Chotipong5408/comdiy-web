@@ -7,7 +7,7 @@ const Layout = () => {
   const location = useLocation();
 
   // Log location.pathname เพื่อดู path ปัจจุบัน
-  console.log("Current path:", location.pathname);
+  
 
   // กำหนดหน้าที่ต้องการซ่อน Footer
   const hideFooterPaths = ["/admin", "/cart", "/checkout"];
